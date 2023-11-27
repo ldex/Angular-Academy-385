@@ -3,17 +3,21 @@
 </h2>
 
 <!-- Angular 17+ -->
-<ul class="products">
-    @for (product of products; track product.id) {
-        <li [class.discontinued]="product.discontinued"
-            [class.selected]="selectedProduct == product"
-            (click)="onSelect(product)">
-            <span class="name">{{ product.name | uppercase }}</span>
-            <span class="description">{{ product.description }}</span>
-            <span class="price">{{ product.price | currency:'CAD':'symbol-narrow':'.2' }}</span>
-        </li>
-    }
-</ul>
+@if (products$ | async; as products) {
+    <ul class="products">
+        @for (product of products; track product.id) {
+            <li [class.discontinued]="product.discontinued"
+                [class.selected]="selectedProduct == product"
+                (click)="onSelect(product)">
+                <span class="name">{{ product.name | uppercase }}</span>
+                <span class="description">{{ product.description }}</span>
+                <span class="price">{{ product.price | currency:'CAD':'symbol-narrow':'.2' }}</span>
+            </li>
+        }
+    </ul>
+} @else {
+    <h2 class="loading">Loading products</h2>
+}
 
 <app-product-detail [product]="selectedProduct"></app-product-detail>
 
