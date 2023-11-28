@@ -2,6 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.interface';
 import { ProductService } from '../../services/product.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,15 +15,13 @@ export class ProductDetailComponent {
 
   private productService = inject(ProductService);
 
-  product: Product;
+  product$: Observable<Product>;
 
   @Input() set id(productId) {
-    this
-      .productService
-      .getProductById(productId)
-      .subscribe(
-        data => this.product = data
-      )
+    this.product$ = this
+                      .productService
+                      .getProductById(productId)
+
   }
 
 }
