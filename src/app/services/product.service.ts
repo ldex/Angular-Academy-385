@@ -30,7 +30,8 @@ export class ProductService {
                       .get<Product[]>(this.baseUrl)
                       .pipe(
                         delay(1500), // pour la démo!!
-                        tap(console.table)
+                        tap(console.table),
+                        shareReplay()
                       );
   }
 }
