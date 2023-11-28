@@ -4,6 +4,8 @@ import { Product } from '../../models/product.interface';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-product-list',
@@ -15,6 +17,7 @@ import { Observable } from 'rxjs';
 export class ProductListComponent {
   title: string = 'Products'
   selectedProduct: Product
+  private router = inject(Router)
   private productService = inject(ProductService)
   products$: Observable<Product[]> = this.productService.products$
 
@@ -40,6 +43,6 @@ export class ProductListComponent {
 
 
   onSelect(product: Product): void {
-    this.selectedProduct = product
+    this.router.navigateByUrl('/products/' + product.id)
   }
 }
