@@ -11,7 +11,10 @@
         <p>Modified date:
             {{product.modifiedDate | date}}</p>
     </div>
+} @else {
+    <h2>No product to display!</h2>
 }
+
 
 <!-- Angular < 17 -->
 <!-- <div *ngIf="product">
